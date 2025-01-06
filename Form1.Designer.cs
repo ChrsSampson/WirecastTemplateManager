@@ -32,7 +32,6 @@
             TemplatePage = new TabPage();
             panel1 = new Panel();
             SelectedTemplateBox = new TextBox();
-            SelectedTemplate = new Label();
             label2 = new Label();
             CreateTemplateButton = new Button();
             TemplateList = new ListBox();
@@ -80,7 +79,6 @@
             // 
             panel1.BackColor = Color.Silver;
             panel1.Controls.Add(SelectedTemplateBox);
-            panel1.Controls.Add(SelectedTemplate);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(CreateTemplateButton);
             panel1.Location = new Point(245, 6);
@@ -97,23 +95,12 @@
             SelectedTemplateBox.Size = new Size(183, 29);
             SelectedTemplateBox.TabIndex = 5;
             // 
-            // SelectedTemplate
-            // 
-            SelectedTemplate.AutoSize = true;
-            SelectedTemplate.Font = new Font("Segoe UI", 10F);
-            SelectedTemplate.ForeColor = Color.Black;
-            SelectedTemplate.Location = new Point(47, 30);
-            SelectedTemplate.Name = "SelectedTemplate";
-            SelectedTemplate.Size = new Size(94, 19);
-            SelectedTemplate.TabIndex = 4;
-            SelectedTemplate.Text = "(No Template)";
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(29, 9);
+            label2.Location = new Point(3, 28);
             label2.Name = "label2";
             label2.Size = new Size(134, 21);
             label2.TabIndex = 3;
@@ -121,7 +108,7 @@
             // 
             // CreateTemplateButton
             // 
-            CreateTemplateButton.BackColor = Color.FromArgb(128, 128, 255);
+            CreateTemplateButton.BackColor = Color.SpringGreen;
             CreateTemplateButton.Font = new Font("Segoe UI", 12F);
             CreateTemplateButton.ForeColor = Color.Black;
             CreateTemplateButton.Location = new Point(3, 228);
@@ -134,11 +121,12 @@
             // 
             // TemplateList
             // 
+            TemplateList.Font = new Font("Segoe UI", 10F);
             TemplateList.FormattingEnabled = true;
-            TemplateList.ItemHeight = 15;
+            TemplateList.ItemHeight = 17;
             TemplateList.Location = new Point(6, 6);
             TemplateList.Name = "TemplateList";
-            TemplateList.Size = new Size(233, 289);
+            TemplateList.Size = new Size(233, 276);
             TemplateList.TabIndex = 2;
             TemplateList.SelectedIndexChanged += TemplateList_SelectedIndexChanged;
             // 
@@ -190,7 +178,7 @@
             FilePathDisplay.AutoSize = true;
             FilePathDisplay.Font = new Font("Segoe UI", 10F);
             FilePathDisplay.ForeColor = Color.Black;
-            FilePathDisplay.Location = new Point(184, 242);
+            FilePathDisplay.Location = new Point(184, 233);
             FilePathDisplay.Name = "FilePathDisplay";
             FilePathDisplay.Size = new Size(59, 19);
             FilePathDisplay.TabIndex = 8;
@@ -199,7 +187,7 @@
             // FilePickerButton
             // 
             FilePickerButton.ForeColor = Color.Black;
-            FilePickerButton.Location = new Point(184, 219);
+            FilePickerButton.Location = new Point(184, 210);
             FilePickerButton.Name = "FilePickerButton";
             FilePickerButton.Size = new Size(160, 23);
             FilePickerButton.TabIndex = 7;
@@ -233,9 +221,9 @@
             // AddButton
             // 
             AddButton.ForeColor = Color.Black;
-            AddButton.Location = new Point(6, 270);
+            AddButton.Location = new Point(6, 261);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(75, 23);
+            AddButton.Size = new Size(75, 32);
             AddButton.TabIndex = 4;
             AddButton.Text = "Add";
             AddButton.UseVisualStyleBackColor = true;
@@ -246,7 +234,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(6, 219);
+            label1.Location = new Point(6, 210);
             label1.Name = "label1";
             label1.Size = new Size(104, 19);
             label1.TabIndex = 3;
@@ -254,7 +242,7 @@
             // 
             // TemplateNameBox
             // 
-            TemplateNameBox.Location = new Point(6, 241);
+            TemplateNameBox.Location = new Point(6, 232);
             TemplateNameBox.Name = "TemplateNameBox";
             TemplateNameBox.Size = new Size(172, 23);
             TemplateNameBox.TabIndex = 1;
@@ -265,9 +253,9 @@
             SaveButton.FlatAppearance.BorderColor = Color.Gray;
             SaveButton.FlatAppearance.BorderSize = 3;
             SaveButton.ForeColor = SystemColors.ActiveCaptionText;
-            SaveButton.Location = new Point(359, 270);
+            SaveButton.Location = new Point(359, 261);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(75, 23);
+            SaveButton.Size = new Size(75, 32);
             SaveButton.TabIndex = 0;
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = false;
@@ -310,7 +298,6 @@
         private Label FilePathDisplay;
         private Button CreateTemplateButton;
         private Panel panel1;
-        private Label SelectedTemplate;
         private Label label2;
         private ListBox TemplateList;
         private Button ExportButton;

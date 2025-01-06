@@ -116,7 +116,7 @@ namespace TemplateTool
         {
             try
             {
-                String name = SelectedTemplate.Text;
+                String name = SelectedTemplateBox.Text;
 
                 DataRow selectedRow = null;
 
@@ -137,8 +137,8 @@ namespace TemplateTool
 
                 if (selectedRow != null && fileExists)
                 {
-                    File.Copy(selectedRow["Path"].ToString(), DesktopPath + "\\" + name);
-                    show_alert("Template Created, Check the desktop for a file called:" + " " + name);
+                    File.Copy(selectedRow["Path"].ToString(), DesktopPath + "\\" + name + ".wcst");
+                    show_alert("Template Created, Check the desktop for a file called:" + " " + name + " " + ".wcst");
                 }
 
             }
@@ -233,7 +233,7 @@ namespace TemplateTool
             try
             {
                 String v = TemplateList.GetItemText(TemplateList.SelectedItem).ToString();
-                SelectedTemplate.Text = v;
+      
                 SelectedTemplateBox.Text = v;
 
             }

@@ -35,9 +35,7 @@
             label2 = new Label();
             CreateTemplateButton = new Button();
             TemplateList = new ListBox();
-            SettingPage = new TabPage();
-            ImportButton = new Button();
-            ExportButton = new Button();
+            MapPage = new TabPage();
             FilePathDisplay = new Label();
             FilePickerButton = new Button();
             TemplateDisplay = new DataGridView();
@@ -45,18 +43,22 @@
             AddButton = new Button();
             label1 = new Label();
             TemplateNameBox = new TextBox();
-            SaveButton = new Button();
+            SettingsPage = new TabPage();
+            button1 = new Button();
+            ExportButton = new Button();
             tabControl1.SuspendLayout();
             TemplatePage.SuspendLayout();
             panel1.SuspendLayout();
-            SettingPage.SuspendLayout();
+            MapPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TemplateDisplay).BeginInit();
+            SettingsPage.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(TemplatePage);
-            tabControl1.Controls.Add(SettingPage);
+            tabControl1.Controls.Add(MapPage);
+            tabControl1.Controls.Add(SettingsPage);
             tabControl1.Location = new Point(7, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -130,55 +132,30 @@
             TemplateList.TabIndex = 2;
             TemplateList.SelectedIndexChanged += TemplateList_SelectedIndexChanged;
             // 
-            // SettingPage
+            // MapPage
             // 
-            SettingPage.BackColor = Color.LightSteelBlue;
-            SettingPage.Controls.Add(ImportButton);
-            SettingPage.Controls.Add(ExportButton);
-            SettingPage.Controls.Add(FilePathDisplay);
-            SettingPage.Controls.Add(FilePickerButton);
-            SettingPage.Controls.Add(TemplateDisplay);
-            SettingPage.Controls.Add(RemoveButton);
-            SettingPage.Controls.Add(AddButton);
-            SettingPage.Controls.Add(label1);
-            SettingPage.Controls.Add(TemplateNameBox);
-            SettingPage.Controls.Add(SaveButton);
-            SettingPage.Location = new Point(4, 24);
-            SettingPage.Name = "SettingPage";
-            SettingPage.Padding = new Padding(3);
-            SettingPage.Size = new Size(440, 299);
-            SettingPage.TabIndex = 1;
-            SettingPage.Text = "Settings";
-            SettingPage.Click += SettingPage_Click;
-            // 
-            // ImportButton
-            // 
-            ImportButton.ForeColor = Color.Black;
-            ImportButton.Location = new Point(359, 184);
-            ImportButton.Name = "ImportButton";
-            ImportButton.Size = new Size(75, 23);
-            ImportButton.TabIndex = 10;
-            ImportButton.Text = "Import";
-            ImportButton.UseVisualStyleBackColor = true;
-            ImportButton.Click += ImportButton_Click;
-            // 
-            // ExportButton
-            // 
-            ExportButton.ForeColor = Color.Black;
-            ExportButton.Location = new Point(269, 184);
-            ExportButton.Name = "ExportButton";
-            ExportButton.Size = new Size(75, 23);
-            ExportButton.TabIndex = 9;
-            ExportButton.Text = "Export";
-            ExportButton.UseVisualStyleBackColor = true;
-            ExportButton.Click += ExportButton_Click;
+            MapPage.BackColor = Color.LightSteelBlue;
+            MapPage.Controls.Add(FilePathDisplay);
+            MapPage.Controls.Add(FilePickerButton);
+            MapPage.Controls.Add(TemplateDisplay);
+            MapPage.Controls.Add(RemoveButton);
+            MapPage.Controls.Add(AddButton);
+            MapPage.Controls.Add(label1);
+            MapPage.Controls.Add(TemplateNameBox);
+            MapPage.Location = new Point(4, 24);
+            MapPage.Name = "MapPage";
+            MapPage.Padding = new Padding(3);
+            MapPage.Size = new Size(440, 299);
+            MapPage.TabIndex = 1;
+            MapPage.Text = "Mappings";
+            MapPage.Click += SettingPage_Click;
             // 
             // FilePathDisplay
             // 
             FilePathDisplay.AutoSize = true;
             FilePathDisplay.Font = new Font("Segoe UI", 10F);
             FilePathDisplay.ForeColor = Color.Black;
-            FilePathDisplay.Location = new Point(184, 233);
+            FilePathDisplay.Location = new Point(239, 229);
             FilePathDisplay.Name = "FilePathDisplay";
             FilePathDisplay.Size = new Size(59, 19);
             FilePathDisplay.TabIndex = 8;
@@ -187,9 +164,9 @@
             // FilePickerButton
             // 
             FilePickerButton.ForeColor = Color.Black;
-            FilePickerButton.Location = new Point(184, 210);
+            FilePickerButton.Location = new Point(239, 203);
             FilePickerButton.Name = "FilePickerButton";
-            FilePickerButton.Size = new Size(160, 23);
+            FilePickerButton.Size = new Size(198, 23);
             FilePickerButton.TabIndex = 7;
             FilePickerButton.Text = "Pick Template File";
             FilePickerButton.UseVisualStyleBackColor = true;
@@ -210,9 +187,9 @@
             // RemoveButton
             // 
             RemoveButton.ForeColor = SystemColors.ActiveCaptionText;
-            RemoveButton.Location = new Point(6, 184);
+            RemoveButton.Location = new Point(125, 261);
             RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(131, 23);
+            RemoveButton.Size = new Size(108, 32);
             RemoveButton.TabIndex = 5;
             RemoveButton.Text = "Remove Path";
             RemoveButton.UseVisualStyleBackColor = true;
@@ -223,9 +200,9 @@
             AddButton.ForeColor = Color.Black;
             AddButton.Location = new Point(6, 261);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(75, 32);
+            AddButton.Size = new Size(113, 32);
             AddButton.TabIndex = 4;
-            AddButton.Text = "Add";
+            AddButton.Text = "Add Entry";
             AddButton.UseVisualStyleBackColor = true;
             AddButton.Click += AddButton_Click;
             // 
@@ -234,7 +211,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(6, 210);
+            label1.Location = new Point(6, 181);
             label1.Name = "label1";
             label1.Size = new Size(104, 19);
             label1.TabIndex = 3;
@@ -242,24 +219,43 @@
             // 
             // TemplateNameBox
             // 
-            TemplateNameBox.Location = new Point(6, 232);
+            TemplateNameBox.Location = new Point(6, 203);
             TemplateNameBox.Name = "TemplateNameBox";
-            TemplateNameBox.Size = new Size(172, 23);
+            TemplateNameBox.Size = new Size(227, 23);
             TemplateNameBox.TabIndex = 1;
             // 
-            // SaveButton
+            // SettingsPage
             // 
-            SaveButton.BackColor = Color.FromArgb(128, 128, 255);
-            SaveButton.FlatAppearance.BorderColor = Color.Gray;
-            SaveButton.FlatAppearance.BorderSize = 3;
-            SaveButton.ForeColor = SystemColors.ActiveCaptionText;
-            SaveButton.Location = new Point(359, 261);
-            SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(75, 32);
-            SaveButton.TabIndex = 0;
-            SaveButton.Text = "Save";
-            SaveButton.UseVisualStyleBackColor = false;
-            SaveButton.Click += SaveButton_Click;
+            SettingsPage.Controls.Add(button1);
+            SettingsPage.Controls.Add(ExportButton);
+            SettingsPage.Location = new Point(4, 24);
+            SettingsPage.Name = "SettingsPage";
+            SettingsPage.Size = new Size(440, 299);
+            SettingsPage.TabIndex = 2;
+            SettingsPage.Text = "Settings";
+            SettingsPage.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.ForeColor = Color.Black;
+            button1.Location = new Point(112, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 28);
+            button1.TabIndex = 1;
+            button1.Text = "Import Configuration";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // ExportButton
+            // 
+            ExportButton.ForeColor = SystemColors.ActiveCaptionText;
+            ExportButton.Location = new Point(3, 3);
+            ExportButton.Name = "ExportButton";
+            ExportButton.Size = new Size(103, 28);
+            ExportButton.TabIndex = 0;
+            ExportButton.Text = "Export Configuation";
+            ExportButton.UseVisualStyleBackColor = true;
+            ExportButton.Click += ExportButton_Click_1;
             // 
             // Form1
             // 
@@ -277,9 +273,10 @@
             TemplatePage.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            SettingPage.ResumeLayout(false);
-            SettingPage.PerformLayout();
+            MapPage.ResumeLayout(false);
+            MapPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)TemplateDisplay).EndInit();
+            SettingsPage.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -287,8 +284,7 @@
 
         private TabControl tabControl1;
         private TabPage TemplatePage;
-        private TabPage SettingPage;
-        private Button SaveButton;
+        private TabPage MapPage;
         private Label label1;
         private TextBox TemplateNameBox;
         private Button AddButton;
@@ -300,8 +296,9 @@
         private Panel panel1;
         private Label label2;
         private ListBox TemplateList;
-        private Button ExportButton;
         private TextBox SelectedTemplateBox;
-        private Button ImportButton;
+        private TabPage SettingsPage;
+        private Button ExportButton;
+        private Button button1;
     }
 }

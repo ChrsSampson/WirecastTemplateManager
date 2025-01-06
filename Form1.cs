@@ -3,6 +3,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Security;
+using System.Windows.Forms.Design;
 using System.Xml.Linq;
 
 namespace TemplateTool
@@ -41,7 +42,7 @@ namespace TemplateTool
 
             TemplateDisplay.DataSource = AppData;
 
-            // sets better contrast for data table
+            //-------sets better contrast for data table------- 
             TemplateDisplay.ForeColor = Color.Black;
             TemplateDisplay.BackgroundColor = Color.White;
         }
@@ -108,7 +109,8 @@ namespace TemplateTool
 
         private void SettingPage_Click(object sender, EventArgs e)
         {
-
+            // deselect active files
+            TemplateNameBox.Text = "";
         }
 
         //Create a new Copy of the Template file and move it to the desktop
@@ -170,6 +172,13 @@ namespace TemplateTool
                     return;
                 }
 
+                if(FilePathDisplay.Text == "")
+                {
+                    Exception err = new Exception("Template Name cannot be empty");
+                    throw_error(err);
+                    return;
+                }
+
                 DataRow newRow = AppData.NewRow();
 
                 newRow["Template Name"] = path;
@@ -178,6 +187,9 @@ namespace TemplateTool
                 AppData.Rows.Add(newRow);
 
                 TemplateNameBox.Text = "";
+
+                write_config_file();
+                Update_TemplateList();
             }
             catch (Exception err)
             {
@@ -199,23 +211,27 @@ namespace TemplateTool
             try
             {
 
-                OpenFileDialog dialog_box = new OpenFileDialog();
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
 
 
-                if (dialog_box.ShowDialog() == DialogResult.OK)
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var pickedFile = dialog_box.FileName;
+                    var pickedFolder = dialog.SelectedPath;
 
                     //Read config file
                     if (File.Exists("Config.xml"))
                     {
-                        var config = AppData.ReadXml("Config.xml");
+                        //Duplicate Operation
+                        //var config = AppData.ReadXml("Config.xml");
 
-                        AppData.WriteXml(pickedFile + ".xml");
+                        AppData.WriteXml(pickedFolder + "\\" + "config.xml");
+
+                        show_alert("config.xml written to: " + pickedFolder);
                     }
                 }
-                
-            } catch(Exception err)
+
+            }
+            catch (Exception err)
             {
                 throw_error(err);
             }
@@ -223,8 +239,24 @@ namespace TemplateTool
 
         private void Import_Settings()
         {
-            Exception err = new Exception("TODO");
-            throw_error(err);
+            try {
+                OpenFileDialog dialog = new OpenFileDialog();
+
+                if(dialog.ShowDialog() == DialogResult.OK)
+                {
+                    string file = dialog.FileName;
+
+                    AppData.ReadXml(file);
+
+                    write_config_file();
+
+                    Update_TemplateList();
+                }
+
+            } catch(Exception err)
+            {
+                throw_error(err);
+            }
         }
 
 
@@ -233,7 +265,7 @@ namespace TemplateTool
             try
             {
                 String v = TemplateList.GetItemText(TemplateList.SelectedItem).ToString();
-      
+
                 SelectedTemplateBox.Text = v;
 
             }
@@ -247,9 +279,19 @@ namespace TemplateTool
         {
             try
             {
-                var rowIndex = TemplateDisplay.CurrentRow.Index;
+                int rowIndex = TemplateDisplay.CurrentRow.Index;
 
-                AppData.Rows[rowIndex].Delete();
+                if (AppData.Rows[rowIndex].ToString() != "")
+                {
+                    AppData.Rows[rowIndex].Delete();
+                    Update_TemplateList();
+                } else
+                {
+                    Exception err = new Exception("Nothing to remove");
+                    throw err;
+                }
+
+                
             }
             catch (Exception err)
             {
@@ -295,12 +337,12 @@ namespace TemplateTool
             Create_New_Template();
         }
 
-        private void ExportButton_Click(object sender, EventArgs e)
+        private void ExportButton_Click_1(object sender, EventArgs e)
         {
             Export_Settings();
         }
 
-        private void ImportButton_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             Import_Settings();
         }

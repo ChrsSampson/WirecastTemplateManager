@@ -1,10 +1,7 @@
-using System.ComponentModel.Design;
+
 using System.Data;
 using System.Diagnostics;
-using System.IO;
-using System.Net.Security;
-using System.Windows.Forms.Design;
-using System.Xml.Linq;
+
 
 namespace TemplateTool
 {
@@ -15,8 +12,6 @@ namespace TemplateTool
             InitializeComponent();
             load_table();
             load_existing_config();
-            // TODO: REMOVE LATER;
-            //load_test_data();
         }
 
         String DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -45,23 +40,6 @@ namespace TemplateTool
             //-------sets better contrast for data table------- 
             TemplateDisplay.ForeColor = Color.Black;
             TemplateDisplay.BackgroundColor = Color.White;
-        }
-
-        private void load_test_data()
-        {
-            int entries = 3;
-            for (var i = 0; i < entries; i++)
-            {
-                DataRow newRow = AppData.NewRow();
-
-                newRow["Template Name"] = "This is a test" + i + ".jpg";
-                newRow["Path"] = "C:\\Users\\sampson.chris\\OneDrive - BroadcastMed, Inc\\Pictures\\FrozenLake.jpg";
-
-                AppData.Rows.Add(newRow);
-
-                TemplateNameBox.Text = "";
-            }
-            Update_TemplateList();
         }
 
         // Updates the displayed values in the list of templates
@@ -140,6 +118,8 @@ namespace TemplateTool
                 if (selectedRow != null && fileExists)
                 {
                     File.Copy(selectedRow["Path"].ToString(), DesktopPath + "\\" + name + ".wcst");
+                    // remove the hidden file attribute
+                    File.SetAttributes(file_path, FileAttributes.None);
                     show_alert("Template Created, Check the desktop for a file called:" + " " + name + " " + ".wcst");
                 }
 
